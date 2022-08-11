@@ -35,7 +35,7 @@ const sign = async (ctx)=>{
                 rspData.data = {signature};
             } catch (error) {
                 rspData.code = 2;
-                rspData.msg = '签名异常'
+                rspData.msg = '签名过程异常'
             }
             ctx.response.body = JSON.stringify(rspData);
         }else{
@@ -49,13 +49,13 @@ const sign = async (ctx)=>{
 const  home = (ctx)=> {
     ctx.response.body = '<h1>Welcome Sign Server!</h1>';
 }
-
+let PORT = 3000;
 async function main() {
-    console.log('http://127.0.0.1:3000');
+    console.log('http://127.0.0.1:'+PORT);
     // parseQuery('collateralId=2&token=0x0000000000000000000000000000000000000000&marketAddress=0xCbd2eAe05Cc82Ad407DFe31e8d4a97e254AF1749&expiration=99999999&chainId=2');
     app.use(route.get('/sign',sign));
     app.use(route.get('/',home));
-    app.listen(3000);
+    app.listen(PORT);
 }
 
 main();
